@@ -1,0 +1,67 @@
+.gradientButton {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    background: linear-gradient(170deg, #4a4a4a, #4a4a4a, #7f7f7f);
+    transition: 0.3s;
+}
+.gradientButton::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(150deg, #4b0885, #1f1e6a, #0b1120);
+    opacity: 0;
+    transition: 0.3s;
+    z-index: -1;
+}
+.gradientButton:hover {
+    border: 2px solid transparent;
+    box-shadow: 1px -1px 0px #6666;
+}
+.gradientButton:hover::before{
+    opacity: 1;
+}
+.gradientButton:active{
+    opacity: 0.5;
+}
+.blackGradient{
+    border: 1.2px solid;
+}
+.profile{
+    background-color: #4d4d4d99;
+    border-radius: 24px;
+    transition: 0.1s;
+}
+.blackGradient,.profile{
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    transition: 0.3s;
+}
+.blackGradient::before,.profile::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: -1;
+    background: linear-gradient(150deg, #424952, #2A313C, #2A313C);
+}
+.blackGradient::before{
+    border-radius: 12px;
+    border: 2px solid #ffffff40;
+}
+.profile::before{
+    border-radius: 24px;
+}
+.profile:hover{
+    border: 2px solid #ffff;
+    opacity: 0.7;
+    background-color: transparent;
+}
+.blackGradient:hover{
+    border: none;
+}
+.blackGradient:hover::before, .profile:hover::before{
+    opacity: 1;
+}

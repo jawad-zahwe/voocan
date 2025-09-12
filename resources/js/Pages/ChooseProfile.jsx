@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Head } from '@inertiajs/react';
-import { Box, Card, Typography, Grid } from '@mui/material';
+import { Box, Card, Typography, Grid, CircularProgress } from '@mui/material';
 import axios from 'axios';
 
 export default function ChooseProfile() {
@@ -179,51 +179,38 @@ export default function ChooseProfile() {
 
                     <Grid container spacing={3} justifyContent="center" component="div">
                         {loading ? (
-                            // عرض loading placeholder
-                            [1, 2, 3].map((profile, index) => (
-                                <Grid
-                                    key={index}
-                                    component="div"
+                            // عرض loading spinner
+                            <Grid
+                                component="div"
+                                sx={{
+                                    width: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    py: 4,
+                                }}
+                            >
+                                <CircularProgress
+                                    size={60}
+                                    thickness={4}
                                     sx={{
-                                        width: { xs: '40%', sm: '30%', md: '18%' },
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
+                                        color: 'hsla(0, 0%, 100%, 0.8)',
+                                        mb: 2,
+                                    }}
+                                />
+                                <Typography
+                                    variant="body2"
+                                    sx={{
+                                        color: 'hsla(0, 0%, 100%, 0.7)',
+                                        fontFamily: 'Cairo, sans-serif',
+                                        fontSize: 16,
+                                        fontWeight: 500,
                                     }}
                                 >
-                                    <Card
-                                        sx={{
-                                            width: 70,
-                                            height: 70,
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            borderRadius: '12px',
-                                            backgroundColor: 'hsla(0, 0%, 30%, 0.6)',
-                                            cursor: 'pointer',
-                                            transition: 'all 0.3s',
-                                            border: '1px solid transparent',
-                                            '& svg path': {
-                                                transition: 'fill 0.3s',
-                                            },
-                                            '&:hover': {
-                                                background: 'linear-gradient(128.93deg, #2A313C 5.32%, rgba(66, 73, 82, 0) 94.68%)',
-                                                borderColor: 'hsla(0, 0%, 100%, 1)',
-                                                '& svg path': {
-                                                    fill: 'hsla(0, 0%, 100%, 0.5)',
-                                                },
-                                            },
-                                        }}
-                                    >
-                                        <svg width="40" height="39" viewBox="0 0 40 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M39.737 35.5678C37.1979 31.064 33.2331 27.5546 28.4809 25.6048C30.8442 23.8135 32.5898 21.316 33.4706 18.4663C34.3514 15.6165 34.3227 12.5589 33.3885 9.72658C32.4544 6.89423 30.6622 4.43074 28.2657 2.68506C25.8693 0.939374 22.9901 0 20.0361 0C17.0821 0 14.2029 0.939374 11.8065 2.68506C9.41002 4.43074 7.61778 6.89423 6.68364 9.72658C5.74949 12.5589 5.72078 15.6165 6.60158 18.4663C7.48238 21.316 9.22803 23.8135 11.5913 25.6048C6.83904 27.5546 2.87427 31.064 0.335181 35.5678C0.17785 35.8235 0.0729899 36.1085 0.026834 36.406C-0.0193219 36.7034 -0.00583119 37.0072 0.0665044 37.2993C0.13884 37.5914 0.268544 37.8658 0.447905 38.1062C0.627265 38.3466 0.852622 38.5481 1.11058 38.6987C1.36853 38.8494 1.65382 38.946 1.94948 38.983C2.24514 39.02 2.54513 38.9965 2.83163 38.9139C3.11812 38.8314 3.38527 38.6915 3.6172 38.5025C3.84912 38.3135 4.04107 38.0793 4.18166 37.8138C7.53737 31.9517 13.4636 28.4554 20.0361 28.4554C26.6086 28.4554 32.5348 31.9536 35.8905 37.8138C36.1952 38.309 36.6784 38.6649 37.2381 38.8065C37.7977 38.9481 38.3899 38.8642 38.8894 38.5725C39.3889 38.2808 39.7567 37.8042 39.9148 37.2435C40.073 36.6828 40.0092 36.0819 39.737 35.5678ZM10.406 14.2305C10.406 12.3055 10.9708 10.4238 12.029 8.82323C13.0871 7.22268 14.5912 5.9752 16.3508 5.23855C18.1105 4.50189 20.0468 4.30915 21.9148 4.6847C23.7829 5.06024 25.4988 5.9872 26.8456 7.34836C28.1924 8.70951 29.1096 10.4437 29.4811 12.3317C29.8527 14.2197 29.662 16.1766 28.9331 17.9551C28.2042 19.7335 26.9699 21.2536 25.3863 22.323C23.8026 23.3925 21.9407 23.9633 20.0361 23.9633C17.4829 23.9603 15.0352 22.934 13.2298 21.1093C11.4245 19.2847 10.409 16.8109 10.406 14.2305Z" fill="white" />
-                                        </svg>
-                                    </Card>
-                                    <Typography variant="body2" sx={{ color: 'hsla(0, 0%, 100%, 1)', mt: 1, fontFamily: 'Cairo, sans-serif', fontSize: 16, fontWeight: 700, fontStyle: "bold" }}>
-                                        Profile {profile}
-                                    </Typography>
-                                </Grid>
-                            ))
+                                    Loading profiles...
+                                </Typography>
+                            </Grid>
                         ) : (
                             // عرض الملفات الشخصية الحقيقية
                             profiles.map((profile, index) => (

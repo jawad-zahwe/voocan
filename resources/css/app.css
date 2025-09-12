@@ -1,3 +1,51 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Import fonts and external CSS first */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import './animate.css';
+
+@layer components {
+    html {
+        @apply scroll-smooth;
+    }
+
+    body {
+        @apply bg-[#fafafa];
+        font-family: 'Cairo', sans-serif;
+    }
+
+}
+@layer base {
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+}
+section:focus {
+  outline: none !important;
+}
+
+/* Remove blue focus outline from search inputs */
+input:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove focus styles from all interactive elements in headers */
+/* .header-search input:focus,
+.header-search input:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+} */

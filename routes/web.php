@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\User\Profiles\ProfileAPIController;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome');
+    return Inertia::render('HomePage');
 });
 
 Route::get('/dashboard', function () {

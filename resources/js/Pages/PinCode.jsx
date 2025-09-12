@@ -37,7 +37,41 @@ export default function pinCodePage() {
         // حفظ معلومات البروفايل المحدد في localStorage
         localStorage.setItem('currentProfile', JSON.stringify(data.data));
         // الانتقال إلى صفحة الويلكم الرئيسية
-        window.location.href = '/welcome';
+        window.location.href = '/';
+      } else {
+        alert(data.message || 'Invalid PIN. Please try again.');
+        setPinCode(''); // مسح الحقل
+      }
+    } catch (error) {
+      console.error('Error verifying PIN:', error);
+      alert('Error verifying PIN. Please try again.');
+    }
+  };
+
+  const verifyPinWithValue = async (pinValue) => {
+    if (!selectedProfile || !pinValue) {
+      alert('Please enter PIN code');
+      return;
+    }
+
+    try {
+      const response = await fetch(`/profiles/${selectedProfile.id}/verify-pin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+        },
+        body: JSON.stringify({ pin_code: pinValue })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // حفظ معلومات البروفايل المحدد في localStorage
+        localStorage.setItem('currentProfile', JSON.stringify(data.data));
+        // الانتقال إلى صفحة الويلكم الرئيسية
+        window.location.href = '/';
       } else {
         alert(data.message || 'Invalid PIN. Please try again.');
         setPinCode(''); // مسح الحقل
@@ -191,6 +225,14 @@ export default function pinCodePage() {
               // السماح فقط بالأرقام
               const value = e.target.value.replace(/[^0-9]/g, '');
               setPinCode(value);
+              
+              // التحقق التلقائي عند إدخال 4 أرقام
+              if (value.length === 4) {
+                // استخدام setTimeout لضمان تحديث state قبل التحقق
+                setTimeout(() => {
+                  verifyPinWithValue(value);
+                }, 100);
+              }
             }}
             onKeyPress={handleKeyPress}
             sx={{

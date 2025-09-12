@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { Box, TextField, Button, Typography, Paper, Checkbox, FormControlLabel } from '@mui/material';
+import { Box, TextField, Button, Typography, Paper, Checkbox, FormControlLabel, InputAdornment, IconButton } from '@mui/material';
 import { TbLogin2 } from "react-icons/tb";
 import CheckIcon from '@mui/icons-material/Check';
 import ReportGmailerrorredTwoToneIcon from '@mui/icons-material/ReportGmailerrorredTwoTone';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import axios from 'axios';
 
 export default function Login({ status, canResetPassword }) {
@@ -14,6 +16,7 @@ export default function Login({ status, canResetPassword }) {
     });
 
     const [apiErrors, setApiErrors] = useState({});
+    const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('access_token');
@@ -306,11 +309,29 @@ export default function Login({ status, canResetPassword }) {
                             placeholder="Password"
                             error={!!errors.password}
                             variant="outlined"
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
                             autoComplete="current-password"
                             InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            edge="end"
+                                            sx={{ 
+                                                color: 'white',
+                                                padding: '4px',
+                                                marginRight: '0px',
+                                                '& .MuiSvgIcon-root': {
+                                                    fontSize: '18px'
+                                                }
+                                            }}
+                                        >
+                                            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
                                 sx: {
                                     alignSelf: 'center',
                                     width: {
@@ -358,6 +379,21 @@ export default function Login({ status, canResetPassword }) {
                                 '& input:focus': {
                                     outline: 'none !important',
                                     boxShadow: 'none !important',
+                                },
+                                '& input[type="password"]::-webkit-textfield-decoration-container': {
+                                    display: 'none !important',
+                                },
+                                '& input[type="password"]::-webkit-credentials-auto-fill-button': {
+                                    display: 'none !important',
+                                },
+                                '& input[type="password"]::-webkit-credentials-auto-fill-button:hover': {
+                                    display: 'none !important',
+                                },
+                                '& input[type="password"]::-ms-reveal': {
+                                    display: 'none !important',
+                                },
+                                '& input[type="password"]::-ms-clear': {
+                                    display: 'none !important',
                                 },
                             }}
                         />

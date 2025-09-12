@@ -1,0 +1,26 @@
+.gradientButton {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    background: linear-gradient(170deg, #4a4a4a, #4a4a4a, #7f7f7f);
+    transition: 0.3s;
+}
+.gradientButton::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(150deg, #4b0885, #1f1e6a, #0b1120);
+    opacity: 0;
+    transition: 0.3s;
+    z-index: -1;
+}
+.gradientButton:hover {
+    border: 2px solid transparent;
+    box-shadow: 1px -1px 0px #6666;
+}
+.gradientButton:hover::before{
+    opacity: 1;
+}
+.gradientButton:active{
+    opacity: 0.5;
+}
